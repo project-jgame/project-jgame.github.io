@@ -1,0 +1,336 @@
+#battle_div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height:100%;
+}@media only screen and (min-width:0px) {
+    :root{
+        --battle-div-controls-move-width:30%;
+        --battle-div-controls-move-height:18%;
+        --battle-div-controls-move-top:calc(95% - var(--battle-div-controls-move-height));
+        --battle-div-controls-move-left:4%;
+   
+        --battle-controls-ability-div-width:60%;
+        --battle-controls-ability-div-height:8%;
+        --battle-controls-ability-div-top:calc(95% - var(--battle-controls-ability-div-height));
+    
+        --battle-controls-abilitytarget-div-height:20%;
+        --battle-controls-abilitytarget-div-top:calc(95% - (var(--battle-controls-abilitytarget-div-height) + var(--battle-controls-ability-div-height)));
+    
+    }
+}
+
+@media only screen and (min-width:0px) {
+    /*
+    * Ability Pad x position is affected by the Move Pad
+    * this style is applied when the Move Pad is visible or not
+    */
+    :root{
+        --a:calc( var( --battle-div-controls-move-left) +  var( --battle-div-controls-move-width) );
+        --b:calc(100% - var(--a));
+        --c:calc(var(--b) / 2);
+        --d:calc(var(--battle-controls-ability-div-width) / 2);
+        --e:calc(var(--c) - var(--d));
+        --f:calc(var(--a) + var(--e));
+        --battle-controls-ability-div-left-movepad:var(--f);
+    }
+}
+/* ================================================================================================================= */
+                                            /* CONTROLS - MOVE PAD */
+/* ================================================================================================================= */
+#battle_div_controls_move{
+    position: absolute;
+    z-index: 1;
+    top: var(--battle-div-controls-move-top);
+    left: var(--battle-div-controls-move-left);
+    width: var(--battle-div-controls-move-width);
+    height: var(--battle-div-controls-move-height);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+/* ================================================================================================================= */
+                                            /* CONTROLS - ABILITY PAD */
+/* ================================================================================================================= */
+#battle_controls_ability_div{
+    /*
+        the left: is applied through the class .movepad_visible or .movepad_hidden styles
+        which the battle_controls_ability_div always have
+    */
+    position: absolute;
+    z-index: 1;
+    top: var(--battle-controls-ability-div-top);
+    width: var(--battle-controls-ability-div-width);
+    height: var(--battle-controls-ability-div-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.battle_controls_abilities{
+    width:calc( var(--battle-controls-ability-div-width) / 4);
+    height:80%;
+    position: relative;
+    top: 0%;
+    left:0%;
+    margin: 3%;
+}
+.battle_controls_ability_images{
+    width: 100%;
+    height:100%;
+    position: absolute;
+    top:0%;
+    left:0%;
+    z-index: 1;
+}
+.battle_controls_ability_cooldowns{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+/* ================================================================================================================= */
+                                            /* CONTROLS - ABILITYTARGET PAD */
+/* ================================================================================================================= */
+#battle_controls_abilitytarget_div{
+     /*
+        the left: is applied through the class .movepad_visible or .movepad_hidden styles
+        which the battle_controls_abilitytarget_div always have
+    */
+    position: absolute;
+    z-index: 1;
+    top: var(--battle-controls-abilitytarget-div-top);
+    width: var(--battle-controls-ability-div-width);
+    height: var(--battle-controls-abilitytarget-div-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+/* ================================================================================================================= */
+                                    /* CONTROLS - ABILITY PAD DIV & ABILITYTARGET DIV */
+    /* 
+    REMEMBER ! - The following style should only be applied after applying the styles 
+                 first on Ability Pad and Ability Target else this won't work
+    */
+/* ================================================================================================================= */
+.movepad_visible{
+    left: var(--battle-controls-ability-div-left-movepad);
+}
+.movepad_hidden{
+    left: var(--battle-controls-ability-div-left);
+}
+/* ================================================================================================================= */
+                                            /* CONTROLS - ABILITYTARGET PAD */
+/* ================================================================================================================= */
+#battle_controls_abilitytarget_pad_div{
+    width: 50%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}@media only screen and (min-width:0px) {
+    :root {
+        --battle-img-profile-width:8%;
+        --battle-img-profile-height:6%;
+        --battle-img-profile-top:2%;
+        --battle-img-profile-left:2%;
+        --battle-img-profile-right:2%;
+        --battle-img-profile-font-size:80%;
+
+        --battle-txt-profile-left:calc(var(--battle-img-profile-left) + var(--battle-img-profile-width) + 1%);
+        --battle-txt-profile-top:calc(var(--battle-img-profile-top) + 0.5%);
+        --battle-txt-profile-font-size: 80%;
+        --battle-txt-profile-height:3%;
+
+        --battle-div-profile-health-left:calc(var(--battle-img-profile-left) + var(--battle-img-profile-width) + 1%);
+        --battle-div-profile-health-top: calc(var(--battle-img-profile-top) + var(--battle-txt-profile-height) + 0.5%);
+        --battle-div-profile-health-width:20%;
+        --battle-div-profile-health-height:2.5%;
+
+        --battle-div-profile-status-left:var(--battle-img-profile-left); /*same as img-left*/
+        --battle-div-profile-status-top:calc(var(--battle-img-profile-top) + var(--battle-txt-profile-height) + var(--battle-div-profile-health-height)  + 1%);/*img-top + img-height*/
+        --battle-div-profile-status-width:30%;
+        --battle-div-profile-status-height:5%;
+    
+        --battle-button-profile-time-width:8%;
+        --battle-button-profile-time-height:6%;
+        --battle-button-profile-time-top:2%;
+        --battle-button-profile-time-left:calc(50% - var(--battle-button-profile-time-width) / 2);
+
+        --battle-txt-profile-time-width:10%;
+        --battle-txt-profile-time-height:3%;
+        --battle-txt-profile-time-left:calc(50% - var(--battle-txt-profile-time-width) / 2);
+        --battle-txt-profile-time-top:calc(var(--battle-button-profile-time-top) + var(--battle-button-profile-time-height) + 0.5%);
+        --battle-txt-profile-time-font-size: 150%;
+
+    }
+}
+
+/* ================================================================================================================= */
+                                            /* PROFILE - PLAYER & ENEMY */
+/* ================================================================================================================= */
+#battle_img_profile_player,
+#battle_img_profile_enemy{
+    position: absolute;
+    z-index: 1;
+    top: var(--battle-img-profile-top);
+    width: var(--battle-img-profile-width);
+    height: var(--battle-img-profile-height);
+    border: 1px solid black;
+}
+#battle_img_profile_player{ left: var(--battle-img-profile-left); }
+#battle_img_profile_enemy{ right: var(--battle-img-profile-left); }
+
+#battle_txt_profile_player,
+#battle_txt_profile_enemy{
+    position: absolute;
+    z-index: 1;
+    top: var(--battle-txt-profile-top);
+    height: var(--battle-txt-profile-height);
+    font-size: var(--battle-txt-profile-font-size);
+}
+#battle_txt_profile_player{ left: var(--battle-txt-profile-left); }
+#battle_txt_profile_enemy{ right: var(--battle-txt-profile-left); }
+
+#battle_div_profile_player_health,
+#battle_div_profile_enemy_health{
+    position: absolute;
+    z-index: 1;
+    top: var(--battle-div-profile-health-top);
+    width: var(--battle-div-profile-health-width);
+    height: var(--battle-div-profile-health-height);
+}
+#battle_div_profile_player_health{ left: var(--battle-div-profile-health-left); }
+#battle_div_profile_enemy_health{ right: var(--battle-div-profile-health-left); }
+
+#battle_div_profile_player_status,
+#battle_div_profile_enemy_status{
+    position: absolute;
+    z-index: 1;
+    top: var(--battle-div-profile-status-top);
+    width: var(--battle-div-profile-status-width);
+    height: var(--battle-div-profile-status-height);
+}
+#battle_div_profile_player_status{ left: var(--battle-div-profile-status-left); }
+#battle_div_profile_enemy_status{ right: var(--battle-div-profile-status-left); }
+/* ================================================================================================================= */
+                                            /* PROFILE - TIME */
+/* ================================================================================================================= */
+#battle_button_profile_time{
+    position: absolute;
+    z-index: 1;
+    top: var(--battle-button-profile-time-top);
+    left: var(--battle-button-profile-time-left); 
+    width: var(--battle-button-profile-time-width);
+    height: var(--battle-button-profile-time-height);
+    border: 1px solid black;
+    font-size: 200%;
+    font-weight: bold;
+}
+#battle_txt_profile_time{
+    position: absolute;
+    z-index: 1;
+    top: var(--battle-txt-profile-time-top);
+    left: var(--battle-txt-profile-time-left);
+    width: var(--battle-txt-profile-time-width);
+    height: var(--battle-txt-profile-time-height);
+    font-size: var(--battle-txt-profile-time-font-size);
+    font-weight: bold;
+    text-align: center;
+}@media screen and (min-width:0px){
+   :root{
+        --home-title-txt-font-size:200%;
+        --home-title-txt-margin-bottom:10%;
+
+        --home-version-txt-font-size:80%;
+        --home-version-txt-top:95%;
+        --home-version-txt-right:2%;
+
+        --home-start-button-font-size:150%;
+        --home-start-button-padding:3%;
+        --home-start-button-margin-bottom:5%
+   }    
+}
+@media screen and (min-width:400px){
+    :root{
+         --home-title-txt-font-size:200%;
+         --home-title-txt-margin-bottom:3%;
+ 
+         --home-version-txt-font-size:80%;
+         --home-version-txt-top:95%;
+         --home-version-txt-right:2%;
+ 
+         --home-start-button-font-size:150%;
+         --home-start-button-padding:1%;
+         --home-start-button-margin-bottom:5%
+    }    
+ }
+
+
+#home_div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height:100%;
+}
+#home_title_txt{
+    font-size: var(--home-title-txt-font-size);
+    font-weight:bold;
+    margin-bottom: var(--home-title-txt-margin-bottom);
+}
+#home_version_txt{
+    position:absolute;
+    top:var(--home-version-txt-top);
+    right:var(--home-version-txt-right);
+    font: var(--home-version-txt-font-size);
+    font-weight:bold;
+}
+#home_start_button{ 
+    font: var(--home-start-button-font-size);
+    font-weight:bold;
+    padding:var(--home-start-button-padding);
+    margin-bottom:var(--home-start-button-margin-bottom);
+}#settings_div{
+    position:absolute;
+    top:0%;
+    left:0%;
+    width: 100%;
+    height:100%;
+    z-index:10;
+    background-color:rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.settings_buttons{
+    font-size:150%;
+    font-weight: bold;
+    margin:2%;
+    padding:1%;
+}
+#settings_view_scale_div,
+#settings_show_movepad_div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width:60%;
+    margin: 2%;
+}
+#settings_view_scale_txt{
+    color:white;
+    font: 150% bold;
+}
+#settings_show_movepad_txt{
+    color:white;
+    font: 150% bold;
+}
+#settings_show_movepad_input{
+    width:10%;
+    height:80%;
+}
+/*This comment was created to prevent the white square from popping up and causing error.*/ 
